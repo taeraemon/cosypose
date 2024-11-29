@@ -16,7 +16,9 @@ stdout*
 *.slurm
 .mypy_cache
 local_data
+local_data*
 dist/
 *.so
 build/
 *.temp
+env
