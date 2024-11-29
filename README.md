@@ -1,3 +1,300 @@
+# Customized Readme (taeraemon)
+
+## 1. Summary of Experiment on Desktop (12900KF, 2*A6000, 22.04, pyenv+venv)
+
+### 1.1 Environment Setup
+```
+git clone --recurse-submodules https://github.com/taeraemon/cosypose.git
+cd cosypose
+
+pyenv install 3.7.6
+pyenv global 3.7.6
+python3 -m venv env
+source env/bin/activate
+
+python3 setup.py install
+```
+&nbsp;
+
+
+### 1.2 Library Setup
+```
+sudo apt-get update
+sudo apt-get install libbz2-dev libncurses5-dev libffi-dev libreadline-dev libsqlite3-dev liblzma-dev
+sudo apt-get install libssl-dev
+sudo apt-get install rclone
+sudo apt-get install meshlab
+sudo apt-get install libjpeg-dev zlib1g-dev libpng-dev
+sudo apt-get install libboost-all-dev libeigen3-dev
+sudo apt-get install build-essential cmake python3-dev
+sudo apt-get install libboost-python-dev
+```
+&nbsp;
+
+
+### 1.3 Package Setup
+```
+pip install --upgrade pip
+pip install torch
+pip install wget
+pip install pyyaml
+pip install joblib
+pip install tqdm
+pip install numpy
+pip install pandas
+pip install pin
+pip install pillow
+pip install transforms3d
+pip install imageio
+pip install pypng
+pip install scipy
+pip install plyfile
+pip install eigenpy
+pip install trimesh
+pip install torchvision
+pip install pybullet
+pip install scikit-learn
+pip install xarray
+pip install pyarrow
+pip install ipython
+pip install ./deps/job-runner
+pip install pyyaml==5.1
+pip install xarray==0.14.1
+```
+&nbsp;
+
+
+### 1.4 To follow Original Manual...
+- sudo vim ~/.bashrc 수정
+```
+export CXX=/usr/bin/gcc
+export GXX=/usr/bin/g++
+export CUDA_VISIBLE_DEVICES=0
+```
+
+- CONDA_PREFIX 관련 수정
+```
+# CONDA_PREFIX = os.environ['CONDA_PREFIX']
+# if 'CONDA_PREFIX_1' in os.environ:
+#     CONDA_BASE_DIR = os.environ['CONDA_PREFIX_1']
+#     CONDA_ENV = os.environ['CONDA_DEFAULT_ENV']
+# else:
+#     CONDA_BASE_DIR = os.environ['CONDA_PREFIX']
+#     CONDA_ENV = 'base'
+CONDA_BASE_DIR = PROJECT_DIR / 'env'
+CONDA_ENV = 'env'
+```
+- local_data 설정
+```
+(데이터셋은 JJH에서 가져옴)
+python3 -m cosypose.scripts.convert_models_to_urdf --models=ycbv.bop
+python3 -m cosypose.scripts.make_ycbv_compat_models
+python3 -m cosypose.scripts.download --model=ycbv-refiner-finetune--251020
+python3 -m cosypose.scripts.download --model=ycbv-refiner-syntonly--596719
+python3 -m cosypose.scripts.download --detections=ycbv_posecnn
+```
+&nbsp;
+
+
+### 1.5 Run Finally !
+```
+python3 -m cosypose.scripts.run_cosypose_eval --config ycbv
+```
+```
+0:03:26.390750 - --------------------------------------------------------------------------------
+100%|████████████████████████████████████████████████████████████████████████████████| 2949/2949 [03:23<00:00, 14.47it/s]
+0:03:27.337963 - Done with predictions
+100%|███████████████████████████████████████████████████████████████████████████████| 2949/2949 [00:05<00:00, 531.71it/s]
+0:03:32.897759 - Evaluation : posecnn (N=15435)
+100%|████████████████████████████████████████████████████████████████████████████████| 2949/2949 [16:26<00:00,  2.99it/s]
+0:20:05.455953 - Skipped: posecnn_init/external_coarse (N=15435)
+0:20:05.456009 - Skipped: posecnn_init/refiner/iteration=1 (N=15435)
+0:20:05.456053 - Evaluation : posecnn_init/refiner/iteration=2 (N=15435)
+100%|████████████████████████████████████████████████████████████████████████████████| 2949/2949 [15:05<00:00,  3.26it/s]
+0:35:18.316332 - --------------------------------------------------------------------------------
+0:35:18.316381 - Results:
+PoseCNN/AUC of ADD(-S): 0.6128217111462837
+Singleview/AUC of ADD(-S): 0.8432288270937727
+Singleview/AUC of ADD-S: 0.8969160734819982
+0:35:18.316396 - --------------------------------------------------------------------------------
+0:35:18.785999 - Saved: /home/tykim/Documents/Github-taeraemon/cosypose/local_data/results/ycbv-n_views=1--8178797717
+Destroy EGL OpenGL window.
+Destroy EGL OpenGL window.
+Destroy EGL OpenGL window.
+Destroy EGL OpenGL window.
+Destroy EGL OpenGL window.
+Destroy EGL OpenGL window.
+Destroy EGL OpenGL window.
+Destroy EGL OpenGL window.
+```
+&nbsp;
+
+
+### 1.6 Result Environment
+```
+(env) tykim@tySM:~/Documents/Github-taeraemon/cosypose$ pip list
+Package                  Version
+------------------------ ------------
+backcall                 0.2.0
+certifi                  2024.8.30
+charset-normalizer       3.4.0
+cmeel                    0.46.0
+cmeel-assimp             5.2.5
+cmeel-boost              1.81.0
+cmeel-console-bridge     1.0.2.1
+cmeel-octomap            1.9.8.1
+cmeel-tinyxml            2.6.2.1
+cmeel-urdfdom            3.1.0.2
+colorama                 0.4.6
+cosypose                 1.0.0
+decorator                5.1.1
+eigenpy                  3.0.0
+hpp-fcl                  2.3.2
+idna                     3.10
+imageio                  2.31.2
+importlib-metadata       6.7.0
+ipython                  7.34.0
+jedi                     0.19.2
+job-runner               0.0.1
+joblib                   1.3.2
+matplotlib-inline        0.1.6
+numpy                    1.21.6
+nvidia-cublas-cu11       11.10.3.66
+nvidia-cuda-nvrtc-cu11   11.7.99
+nvidia-cuda-runtime-cu11 11.7.99
+nvidia-cudnn-cu11        8.5.0.96
+pandas                   1.3.5
+parso                    0.8.4
+pexpect                  4.9.0
+pickleshare              0.7.5
+Pillow                   9.5.0
+pin                      2.6.18
+pip                      24.0
+plyfile                  0.9
+prompt_toolkit           3.0.48
+ptyprocess               0.7.0
+pyarrow                  12.0.1
+pybullet                 3.2.6
+Pygments                 2.17.2
+pypng                    0.20220715.0
+python-dateutil          2.9.0.post0
+pytz                     2024.2
+PyYAML                   5.1
+requests                 2.31.0
+scikit-learn             1.0.2
+scipy                    1.7.3
+setuptools               41.2.0
+six                      1.16.0
+threadpoolctl            3.1.0
+tomli                    2.0.1
+torch                    1.13.1
+torchvision              0.14.1
+tqdm                     4.67.0
+traitlets                5.9.0
+transforms3d             0.4.2
+trimesh                  4.4.1
+typing_extensions        4.7.1
+urllib3                  2.0.7
+wcwidth                  0.2.13
+wget                     3.2
+wheel                    0.42.0
+xarray                   0.14.1
+zipp                     3.15.0
+```
+&nbsp;
+
+
+### 1.7 Trouble Shooting
+- eigenpy 관련
+```
+* Problem
+(env) tykim@tySM:~/Documents/Github-taeraemon/cosypose$ python3 -m cosypose.scripts.convert_models_to_urdf --models=ycbv
+Setting OMP and MKL num threads to 1.
+Traceback (most recent call last):
+  File "/home/tykim/.pyenv/versions/3.7.6/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/home/tykim/.pyenv/versions/3.7.6/lib/python3.7/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/home/tykim/Documents/Github-taeraemon/cosypose/cosypose/scripts/convert_models_to_urdf.py", line 7, in <module>
+    from cosypose.datasets.datasets_cfg import make_object_dataset
+  File "/home/tykim/Documents/Github-taeraemon/cosypose/cosypose/datasets/datasets_cfg.py", line 8, in <module>
+    from .bop import BOPDataset, remap_bop_targets
+  File "/home/tykim/Documents/Github-taeraemon/cosypose/cosypose/datasets/bop.py", line 11, in <module>
+    from cosypose.lib3d import Transform
+  File "/home/tykim/Documents/Github-taeraemon/cosypose/cosypose/lib3d/__init__.py", line 1, in <module>
+    from .transform import Transform, parse_pose_args
+  File "/home/tykim/Documents/Github-taeraemon/cosypose/cosypose/lib3d/transform.py", line 4, in <module>
+    eigenpy.switchToNumpyArray()
+AttributeError: module 'eigenpy' has no attribute 'switchToNumpyArray'
+
+
+* Solution
+transform.py에 eigenpy.switchToNumpyArray()를 그냥 주석화
+```
+
+- 이해못함
+```
+* Problem
+yaml.constructor.ConstructorError: could not determine a constructor for the tag 'tag:yaml.org,2002:python/object:argparse.Namespace'
+  in "<unicode string>", line 1, column 1:
+    !!python/object:argparse.Namespace
+
+TypeError: Using a DataArray object to construct a variable is ambiguous, please extract the data using the .data property.
+
+
+* Solution
+pip install ipython
+pip install ./deps/job-runner
+pip install pyyaml==5.1
+pip install xarray==0.14.1
+```
+
+- pandas deprecated 관련
+```
+* Problem
+Traceback (most recent call last):
+  File "/home/tykim/.pyenv/versions/3.7.6/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/home/tykim/.pyenv/versions/3.7.6/lib/python3.7/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/home/tykim/Documents/Github-taeraemon/cosypose/cosypose/scripts/run_cosypose_eval.py", line 491, in <module>
+    main()
+  File "/home/tykim/Documents/Github-taeraemon/cosypose/cosypose/scripts/run_cosypose_eval.py", line 433, in main
+    eval_metrics[preds_k], eval_dfs[preds_k] = eval_runner.evaluate(preds)
+  File "/home/tykim/Documents/Github-taeraemon/cosypose/cosypose/evaluation/eval_runner/pose_eval.py", line 68, in evaluate
+    return self.summary()
+  File "/home/tykim/Documents/Github-taeraemon/cosypose/cosypose/evaluation/eval_runner/pose_eval.py", line 75, in summary
+    summary_, df_ = meter.summary()
+  File "/home/tykim/Documents/Github-taeraemon/cosypose/cosypose/evaluation/meters/pose_meters.py", line 278, in summary
+    if df.index.contains(label):
+AttributeError: 'Index' object has no attribute 'contains'
+
+
+* Solution
+pandas에 deprecated된거 고쳐주면 됨.
+if df.index.contains(label):  ->  if label in df.index:
+```
+
+
+
+
+
+## 2. Summary of Experiment on Embedded (Jetson Orin Xavier, Jetpack 6 L4T R36.3 + CUDA12.2)
+
+TBU
+
+---
+
+
+
+
+
+
+
+
+
+
+# Origin Readme
 <h1 align="center">
 CosyPose: Consistent multi-view multi-object 6D pose estimation
 </h1>
