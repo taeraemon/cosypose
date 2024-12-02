@@ -71,6 +71,7 @@ export CXX=/usr/bin/gcc
 export GXX=/usr/bin/g++
 export CUDA_VISIBLE_DEVICES=0
 ```
+&nbsp;
 
 - CONDA_PREFIX 관련 수정
 ```
@@ -84,6 +85,8 @@ export CUDA_VISIBLE_DEVICES=0
 CONDA_BASE_DIR = PROJECT_DIR / 'env'
 CONDA_ENV = 'env'
 ```
+&nbsp;
+
 - local_data 설정
 ```
 (데이터셋은 JJH에서 가져옴)
@@ -231,6 +234,7 @@ AttributeError: module 'eigenpy' has no attribute 'switchToNumpyArray'
 * Solution
 transform.py에 eigenpy.switchToNumpyArray()를 그냥 주석화
 ```
+&nbsp;
 
 - 이해못함
 ```
@@ -248,6 +252,7 @@ pip install ./deps/job-runner
 pip install pyyaml==5.1
 pip install xarray==0.14.1
 ```
+&nbsp;
 
 - pandas deprecated 관련
 ```
@@ -275,19 +280,168 @@ pandas에 deprecated된거 고쳐주면 됨.
 if df.index.contains(label):  ->  if label in df.index:
 ```
 
-
+&nbsp;
 
 
 
 ## 2. Summary of Experiment on Embedded (Jetson Orin Xavier, Jetpack 6 L4T R36.3 + CUDA12.2)
 
-TBU
+밑에 정리된 내용 외에는 1번 내용을 그대로 따라하면 됨. 특이사항만 따로 정리함.
 
+&nbsp;
+
+
+### 2.1 Environment Setup
+```
+pyenv install 3.10
+pyenv global 3.10
+
+이외 특이사항 없음.
+```
+&nbsp;
+
+
+### 2.3 Package Setup
+- PyTorch 관련 직접 설치
+```
+Jetson에서는 PyTorch 패키지를 nvidia에서 제공하는거로 깔아야함.
+https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048
+여기서 다운받으면 됨.
+
+실험한 환경은 Jetpack 6 L4T R36.3 + CUDA 12.2 이므로,
+PyTorch v2.3.0에서 아래 두개 설치하면 됨.
+* torch 2.3 - torch-2.3.0-cp310-cp310-linux_aarch64.whl
+* torchvision 0.18 - torchvision-0.18.0a0+6043vc2-cp310-cp310-linux_aarch64.whl
+
+보다싶이, 파이썬 3.10을 위해 빌드된거라 가상환경도 기존 cosypose에서 제공하는 것과는 달리 3.10을 기반으로 세팅해야함.
+
+설치는 설치된 경로에서 아래의 명령어로 가능.
+pip install ./torch 2.3 - torch-2.3.0-cp310-cp310-linux_aarch64.whl
+
+
+근데 nvidia에서 제공하는 torch 바이너리에는 nccl 백엔드가 고려되지 않을 것처럼 보임. (코드에서 nccl 백엔드 지정하면 에러 발생.)
+설치하는 것도 가능하겠으나, 이는 gloo로 수정하고 진행할 것 권장.
+```
+&nbsp;
+
+- Pybullet
+```
+pip로 pybullet을 설치했을 때 그냥 되는 경우도 있으나,
+
+_ztvn10 __ cxxabiv120 __ si_class_type_infoe
+위의 선언을 찾지 못했다는 에러를 마주할 수 있음.
+
+이거는 단순히 코드에서
+import pybullet
+만 해도 발생함.
+
+그러면 코드에서 직접 빌드해야함.
+```
+```
+sudo apt update
+sudo apt install build-essential cmake libstdc++-10-dev
+pip uninstall pybullet
+git clone https://github.com/bulletphysics/bullet3.git
+cd bullet3
+
+그리고 setup.py에서 CXX_FLAGS에
+CXX_FLAGS += '-D_GLIBCXX_USE_CXX11_ABI=1
+이를 추가.
+
+python3 setup.py build
+python3 setup.py install
+
+이후 import pybullet으로 정상 동작 확인.
+```
+&nbsp;
+
+- Numpy
+```
+AttributeError: module 'numpy' has no attribute 'int'
+코드가 예전 Numpy를 기준으로 작업되었기에, 최신 Numpy에서는 동작하지 않을 수 있음.
+따라서 아래 정리된 최종 환경을 통해 전체 버전을 조정할 필요가 있음.
+```
+&nbsp;
+
+
+### 2.6 Result Environment
+```
+(env) nesl@ubuntu:/media/nesl/tykim/tykim_cosypose/cosypose$ pip list
+Package              Version
+-------------------- ----------------
+asttokens            2.4.1
+cmeel                0.53.3
+cmeel-assimp         5.3.1
+cmeel-boost          1.83.0
+cmeel-console-bridge 1.0.2.2
+cmeel-octomap        1.9.8.2
+cmeel-qhull          8.0.2.1
+cmeel-tinyxml        2.6.2.3
+cmeel-urdfdom        3.1.1.1
+cosypose             1.0.0
+decorator            5.1.1
+eigenpy              3.5.1
+exceptiongroup       1.2.2
+executing            2.1.0
+filelock             3.16.1
+fsspec               2024.10.0
+hpp-fcl              2.4.4
+imageio              2.36.1
+ipython              8.29.0
+jedi                 0.19.2
+Jinja2               3.1.4
+job-runner           0.0.1
+joblib               1.4.2
+MarkupSafe           3.0.2
+matplotlib-inline    0.1.7
+mpmath               1.3.0
+networkx             3.4.2
+numpy                1.23.5
+packaging            24.2
+pandas               1.3.5
+parso                0.8.4
+pexpect              4.9.0
+pillow               11.0.0
+pin                  2.7.0
+pip                  24.3.1
+plyfile              1.1
+prompt_toolkit       3.0.48
+ptyprocess           0.7.0
+pure_eval            0.2.3
+pyarrow              18.1.0
+pybullet             3.2.5
+Pygments             2.18.0
+pypng                0.20220715.0
+python-dateutil      2.9.0.post0
+pytz                 2024.2
+PyYAML               5.1
+scikit-learn         1.5.2
+scipy                1.14.1
+setuptools           65.5.0
+six                  1.16.0
+stack-data           0.6.3
+sympy                1.13.3
+threadpoolctl        3.5.0
+tomli                2.2.1
+torch                2.3.0
+torchvision          0.18.0a0+6043bc2
+tqdm                 4.67.1
+traitlets            5.14.3
+transforms3d         0.4.2
+trimesh              4.5.3
+typing_extensions    4.12.2
+tzdata               2024.2
+wcwidth              0.2.13
+wget                 3.2
+xarray               0.14.1
+```
 ---
 
 
 
-
+&nbsp;
+&nbsp;
+&nbsp;
 
 
 
