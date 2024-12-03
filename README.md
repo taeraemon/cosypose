@@ -435,6 +435,122 @@ wcwidth              0.2.13
 wget                 3.2
 xarray               0.14.1
 ```
+&nbsp;
+
+
+### 2.7 Additional Dependency from Custom Scenario
+```
+pip install opencv-python==4.10.0.82
+pip install opencv-contrib-python==4.10.0.82
+pip install bokeh==1.4.0
+pip install seaborn
+pip install jinja2==3.0.0
+```
+
+Add "plot_overlay_array" to cosypose/cosypose/visualization/plotter.py
+```
+def plot_overlay(self, rgb_input, rgb_rendered):
+    ...
+
+def plot_overlay_array(self, rgb_input, rgb_rendered):
+    rgb_input = np.asarray(rgb_input)
+    rgb_rendered = np.asarray(rgb_rendered)
+    assert rgb_input.dtype == np.uint8 and rgb_rendered.dtype == np.uint8
+    mask = ~(rgb_rendered.sum(axis=-1) == 0)
+
+    overlay = np.zeros_like(rgb_input)
+    overlay[~mask] = rgb_input[~mask] * 0.6 + 255 * 0.4
+    overlay[mask] = rgb_rendered[mask] * 0.8 + 255 * 0.2
+    return overlay
+
+def plot_maskrcnn_bboxes(self, f, detections, colors='red', text=None, text_auto=True, line_width=2, source_id=''):
+    ...
+```
+&nbsp;
+
+
+### 2.8 Fixed Environment
+```
+(env) nesl@ubuntu:/media/nesl/tykim/tykim_cosypose/cosypose$ pip list
+Package               Version
+--------------------- ----------------
+asttokens             2.4.1
+bokeh                 1.4.0
+cmeel                 0.53.3
+cmeel-assimp          5.3.1
+cmeel-boost           1.83.0
+cmeel-console-bridge  1.0.2.2
+cmeel-octomap         1.9.8.2
+cmeel-qhull           8.0.2.1
+cmeel-tinyxml         2.6.2.3
+cmeel-urdfdom         3.1.1.1
+contourpy             1.3.1
+cosypose              1.0.0
+cycler                0.12.1
+decorator             5.1.1
+eigenpy               3.5.1
+exceptiongroup        1.2.2
+executing             2.1.0
+filelock              3.16.1
+fonttools             4.55.1
+fsspec                2024.10.0
+hpp-fcl               2.4.4
+imageio               2.36.1
+ipython               8.29.0
+jedi                  0.19.2
+Jinja2                3.0.0
+job-runner            0.0.1
+joblib                1.4.2
+kiwisolver            1.4.7
+MarkupSafe            3.0.2
+matplotlib            3.9.3
+matplotlib-inline     0.1.7
+mpmath                1.3.0
+networkx              3.4.2
+numpy                 1.23.5
+opencv-contrib-python 4.10.0.82
+opencv-python         4.10.0.82
+packaging             24.2
+pandas                1.3.5
+parso                 0.8.4
+pexpect               4.9.0
+pillow                11.0.0
+pin                   2.7.0
+pip                   24.3.1
+plyfile               1.1
+prompt_toolkit        3.0.48
+ptyprocess            0.7.0
+pure_eval             0.2.3
+pyarrow               18.1.0
+pybullet              3.2.5
+Pygments              2.18.0
+pyparsing             3.2.0
+pypng                 0.20220715.0
+python-dateutil       2.9.0.post0
+pytz                  2024.2
+PyYAML                5.1
+scikit-learn          1.5.2
+scipy                 1.14.1
+seaborn               0.13.2
+setuptools            65.5.0
+six                   1.16.0
+stack-data            0.6.3
+sympy                 1.13.3
+threadpoolctl         3.5.0
+tomli                 2.2.1
+torch                 2.3.0
+torchvision           0.18.0a0+6043bc2
+tornado               6.4.2
+tqdm                  4.67.1
+traitlets             5.14.3
+transforms3d          0.4.2
+trimesh               4.5.3
+typing_extensions     4.12.2
+tzdata                2024.2
+wcwidth               0.2.13
+wget                  3.2
+xarray                0.14.1
+```
 ---
 
 
