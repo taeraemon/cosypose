@@ -2,6 +2,15 @@
 
 ## 1. Summary of Experiment on Desktop (12900KF, 2*A6000, 22.04, pyenv+venv)
 
+
+
+
+
+
+
+
+
+
 ### 1.1 Environment Setup
 ```
 git clone --recurse-submodules https://github.com/taeraemon/cosypose.git
@@ -17,6 +26,14 @@ python3 setup.py install
 &nbsp;
 
 
+
+
+
+
+
+
+
+
 ### 1.2 Library Setup
 ```
 sudo apt-get update
@@ -30,6 +47,14 @@ sudo apt-get install build-essential cmake python3-dev
 sudo apt-get install libboost-python-dev
 ```
 &nbsp;
+
+
+
+
+
+
+
+
 
 
 ### 1.3 Package Setup
@@ -62,6 +87,16 @@ pip install pyyaml==5.1
 pip install xarray==0.14.1
 ```
 &nbsp;
+
+&nbsp;
+
+
+
+
+
+
+
+
 
 
 ### 1.4 To follow Original Manual...
@@ -98,12 +133,23 @@ python3 -m cosypose.scripts.download --detections=ycbv_posecnn
 ```
 &nbsp;
 
+&nbsp;
+
+
+
+
+
+
+
+
+
 
 ### 1.5 Run Finally !
 ```
 python3 -m cosypose.scripts.run_cosypose_eval --config ycbv
 ```
-```
+<details>
+<pre><code>
 0:03:26.390750 - --------------------------------------------------------------------------------
 100%|████████████████████████████████████████████████████████████████████████████████| 2949/2949 [03:23<00:00, 14.47it/s]
 0:03:27.337963 - Done with predictions
@@ -129,12 +175,152 @@ Destroy EGL OpenGL window.
 Destroy EGL OpenGL window.
 Destroy EGL OpenGL window.
 Destroy EGL OpenGL window.
+</code></pre>
+</details>
+
+#### 2026.01.13 tykim
 ```
+python3 -m cosypose.scripts.run_single_test
+```
+<details>
+<pre><code>
+(env) nesl@nesl-MS-7D99:~/Documents/cosypose$ python3 -m cosypose.scripts.run_single_test
+Setting OMP and MKL num threads to 1.
+pybullet build time: Jan 29 2025 23:19:04
+start...........................................
+/home/nesl/Documents/cosypose/env/lib/python3.7/site-packages/torchvision/models/_utils.py:136: UserWarning: Using 'backbone_name' as positional parameter(s) is deprecated since 0.13 and may be removed in the future. Please use keyword parameter(s) instead.
+  f"Using {sequence_to_str(tuple(keyword_only_kwargs.keys()), separate_last='and ')} as positional "
+/home/nesl/Documents/cosypose/env/lib/python3.7/site-packages/torchvision/models/_utils.py:209: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  f"The parameter '{pretrained_param}' is deprecated since 0.13 and may be removed in the future, "
+/home/nesl/Documents/cosypose/env/lib/python3.7/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+0:00:02.554945 - Backbone: efficientnet-b3
+EGL device choice: 0 of 3 (from EGL_VISIBLE_DEVICES)
+Loaded EGL 1.5 after reload.
+EGL device choice: 0 of 3 (from EGL_VISIBLE_DEVICES)
+Loaded EGL 1.5 after reload.
+0:00:02.653542 - Backbone: efficientnet-b3
+EGL device choice: 0 of 3 (from EGL_VISIBLE_DEVICES)
+Loaded EGL 1.5 after reload.
+EGL device choice: 0 of 3 (from EGL_VISIBLE_DEVICES)
+Loaded EGL 1.5 after reload.
+GL_VENDOR=NVIDIA Corporation
+GL_RENDERER=NVIDIA GeForce RTX 3090/PCIe/SSE2
+GL_VERSION=3.3.0 NVIDIA 580.95.05
+GL_SHADING_LANGUAGE_VERSION=3.30 NVIDIA via Cg compiler
+Version = 3.3.0 NVIDIA 580.95.05
+Vendor = NVIDIA Corporation
+Renderer = NVIDIA GeForce RTX 3090/PCIe/SSE2
+GL_VENDOR=NVIDIA Corporation
+GL_RENDERER=NVIDIA GeForce RTX 3090/PCIe/SSE2
+GL_VERSION=3.3.0 NVIDIA 580.95.05
+GL_SHADING_LANGUAGE_VERSION=3.30 NVIDIA via Cg compiler
+Version = 3.3.0 NVIDIA 580.95.05
+Vendor = NVIDIA Corporation
+Renderer = NVIDIA GeForce RTX 3090/PCIe/SSE2
+GL_VENDOR=NVIDIA Corporation
+GL_RENDERER=NVIDIA GeForce RTX 3090/PCIe/SSE2
+GL_VERSION=3.3.0 NVIDIA 580.95.05
+GL_SHADING_LANGUAGE_VERSION=3.30 NVIDIA via Cg compiler
+Version = 3.3.0 NVIDIA 580.95.05
+Vendor = NVIDIA Corporation
+Renderer = NVIDIA GeForce RTX 3090/PCIe/SSE2
+GL_VENDOR=NVIDIA Corporation
+GL_RENDERER=NVIDIA GeForce RTX 3090/PCIe/SSE2
+GL_VERSION=3.3.0 NVIDIA 580.95.05
+GL_SHADING_LANGUAGE_VERSION=3.30 NVIDIA via Cg compiler
+Version = 3.3.0 NVIDIA 580.95.05
+Vendor = NVIDIA Corporation
+Renderer = NVIDIA GeForce RTX 3090/PCIe/SSE2
+EGL device choice: 0 of 3 (from EGL_VISIBLE_DEVICES)
+Loaded EGL 1.5 after reload.
+GL_VENDOR=NVIDIA Corporation
+GL_RENDERER=NVIDIA GeForce RTX 3090/PCIe/SSE2
+GL_VERSION=3.3.0 NVIDIA 580.95.05
+GL_SHADING_LANGUAGE_VERSION=3.30 NVIDIA via Cg compiler
+Version = 3.3.0 NVIDIA 580.95.05
+Vendor = NVIDIA Corporation
+Renderer = NVIDIA GeForce RTX 3090/PCIe/SSE2
+Enter here-----------------------------
+image =  /home/nesl/Documents/cosypose/data/raw_images/exp_003/color/000001-color.png
+enter here--------------------1
+ven = NVIDIA Corporation
+ven = NVIDIA Corporation
+ven = NVIDIA Corporation
+ven = NVIDIA Corporation
+ven = NVIDIA Corporation
+Infer time: 1.6177 s
+----------------------------------------------------
+num of pred: 1
+object  0 : obj_000002 ------
+  pose: [[-0.13075973  0.99132013  0.01365157  0.05826144]
+ [ 0.01635651  0.01592501 -0.9997393  -0.03562605]
+ [-0.99127907 -0.1305024  -0.0182969   0.71344346]
+ [ 0.          0.          0.          1.        ]]
+  detection score: 0.9299080967903137
+image =  /home/nesl/Documents/cosypose/data/raw_images/exp_003/color/000002-color.png
+enter here--------------------1
+ven = NVIDIA Corporation
+ven = NVIDIA Corporation
+ven = NVIDIA Corporation
+Infer time: 0.1545 s
+----------------------------------------------------
+num of pred: 1
+object  0 : obj_000016 ------
+  pose: [[ 0.45759323  0.11171261 -0.882116   -0.09667332]
+ [ 0.80225235 -0.47965375  0.35542014  0.14293148]
+ [-0.3834053  -0.87031746 -0.309108    0.25915754]
+ [ 0.          0.          0.          1.        ]]
+  detection score: 0.9452535510063171
+image =  /home/nesl/Documents/cosypose/data/raw_images/exp_003/color/006846-color.png
+enter here--------------------1
+Infer time: 0.0975 s
+----------------------------------------------------
+num of pred: 1
+object  0 : obj_000016 ------
+  pose: [[-0.11196965  0.36662793  0.9236054  -0.09433261]
+ [-0.17316842  0.9080293  -0.3814385   0.13252757]
+ [-0.9785068  -0.20264894 -0.03818319  0.24594302]
+ [ 0.          0.          0.          1.        ]]
+  detection score: 0.9461824893951416
+image =  /home/nesl/Documents/cosypose/data/raw_images/exp_003/color/006847-color.png
+enter here--------------------1
+Infer time: 0.0996 s
+----------------------------------------------------
+num of pred: 1
+object  0 : obj_000016 ------
+  pose: [[ 0.49947134 -0.11305813 -0.8589216  -0.08589873]
+ [ 0.44803572 -0.8148563   0.36779496  0.14164527]
+ [-0.7414799  -0.5685307  -0.35634315  0.25345147]
+ [ 0.          0.          0.          1.        ]]
+  detection score: 0.961519181728363
+Destroy EGL OpenGL window.
+end
+Destroy EGL OpenGL window.
+Destroy EGL OpenGL window.
+Destroy EGL OpenGL window.
+Destroy EGL OpenGL window.
+</code></pre>
+</details>
+&nbsp;
+
+&nbsp;
+
 &nbsp;
 
 
+
+
+
+
+
+
+
+
 ### 1.6 Result Environment
-```
+#### v1
+<details>
+<pre><code>
 (env) tykim@tySM:~/Documents/Github-taeraemon/cosypose$ pip list
 Package                  Version
 ------------------------ ------------
@@ -203,8 +389,106 @@ wget                     3.2
 wheel                    0.42.0
 xarray                   0.14.1
 zipp                     3.15.0
-```
+</code></pre>
+</details>
 &nbsp;
+
+#### v2 (2026.01.13 tykim)
+<details>
+<pre><code>
+(env) nesl@nesl-MS-7D99:~/Documents/cosypose$ pip list
+Package                  Version
+------------------------ ------------
+backcall                 0.2.0
+bokeh                    2.4.3
+certifi                  2026.1.4
+charset-normalizer       3.4.4
+cmeel                    0.46.0
+cmeel-assimp             5.2.5
+cmeel-boost              1.80.0
+cmeel-console-bridge     1.0.2.1
+cmeel-octomap            1.9.8.1
+cmeel-tinyxml            2.6.2.1
+cmeel-urdfdom            3.1.0.2
+cosypose                 1.0.0
+cycler                   0.11.0
+decorator                5.1.1
+eigenpy                  3.0.0
+fonttools                4.38.0
+hpp-fcl                  2.3.2
+idna                     3.10
+imageio                  2.31.2
+importlib-metadata       6.7.0
+ipython                  7.34.0
+jedi                     0.19.2
+Jinja2                   3.1.6
+job-runner               0.0.1
+joblib                   1.3.2
+kiwisolver               1.4.5
+MarkupSafe               2.1.5
+matplotlib               3.5.3
+matplotlib-inline        0.1.6
+numpy                    1.21.6
+nvidia-cublas-cu11       11.10.3.66
+nvidia-cuda-nvrtc-cu11   11.7.99
+nvidia-cuda-runtime-cu11 11.7.99
+nvidia-cudnn-cu11        8.5.0.96
+opencv-python            4.12.0.88
+packaging                24.0
+pandas                   1.3.5
+parso                    0.8.5
+pexpect                  4.9.0
+pickleshare              0.7.5
+Pillow                   9.5.0
+pin                      2.6.18
+pip                      24.0
+plyfile                  0.9
+prompt_toolkit           3.0.48
+ptyprocess               0.7.0
+pyarrow                  12.0.1
+pybullet                 3.2.7
+Pygments                 2.17.2
+pyparsing                3.1.4
+pypng                    0.20220715.0
+python-dateutil          2.9.0.post0
+pytz                     2025.2
+PyYAML                   5.1
+requests                 2.31.0
+scikit-learn             1.0.2
+scipy                    1.7.3
+seaborn                  0.12.2
+setuptools               41.2.0
+six                      1.17.0
+threadpoolctl            3.1.0
+tomli                    2.0.1
+torch                    1.13.1
+torchvision              0.14.1
+tornado                  6.2
+tqdm                     4.67.1
+traitlets                5.9.0
+transforms3d             0.4.2
+trimesh                  4.4.1
+typing_extensions        4.7.1
+urllib3                  2.0.7
+wcwidth                  0.2.14
+wget                     3.2
+wheel                    0.42.0
+xarray                   0.14.1
+zipp                     3.15.0
+</code></pre>
+</details>
+
+&nbsp;
+
+&nbsp;
+
+
+
+
+
+
+
+
 
 
 ### 1.7 Trouble Shooting
@@ -279,8 +563,94 @@ AttributeError: 'Index' object has no attribute 'contains'
 pandas에 deprecated된거 고쳐주면 됨.
 if df.index.contains(label):  ->  if label in df.index:
 ```
-
 &nbsp;
+
+- boost 관련 라이브러리 버전 이슈 (2026.01.13 tykim)
+```
+* Problem
+File "/home/nesl/Documents/cosypose/env/lib/python3.7/site-packages/cmeel.prefix/lib/python3.7/site-packages/pinocchio/__init__.py", line 6, in <module>
+    from .pinocchio_pywrap import *
+ImportError: libboost_filesystem.so.1.81.0: cannot open shared object file: No such file or directory
+
+File "/home/nesl/Documents/cosypose/env/lib/python3.7/site-packages/cmeel.prefix/lib/python3.7/site-packages/pinocchio/__init__.py", line 6, in <module>
+    from .pinocchio_pywrap import *
+ImportError: libboost_serialization.so.1.81.0: cannot open shared object file: No such file or directory
+
+File "/home/nesl/Documents/cosypose/env/lib/python3.7/site-packages/cmeel.prefix/lib/python3.7/site-packages/pinocchio/__init__.py", line 6, in <module>
+    from .pinocchio_pywrap import *
+ImportError: libboost_chrono.so.1.81.0: cannot open shared object file: No such file or directory
+
+* Reason
+boost 관련 라이브러리가 파이썬 3.7.6과 호환되지 않는 버전으로만 설치됨.
+boost 관련 라이브러리는 
+sudo apt-get install libboost-all-dev libeigen3-dev
+sudo apt-get install libboost-python-dev
+위와 같은 명령으로 설치되는데, 해결 어려움.
+따라서 boost 소스코드를 직접 받아서 버전에 맞게 빌드하는 형태로 진행해야함.
+
+* Solution (pyenv+venv 기준)
+cd ~/Downloads
+wget https://archives.boost.io/release/1.81.0/source/boost_1_81_0.tar.gz
+tar -xzf boost_1_81_0.tar.gz
+cd boost_1_81_0
+PY37=$(pyenv which python)
+echo $PY37 # 확인
+./bootstrap.sh   --with-python=$PY37   --with-libraries=python
+sudo ./b2   -j$(nproc)   install   --prefix=/usr/local
+sudo ./b2 -j$(nproc) install   --prefix=/usr/local   --with-filesystem --with-system
+sudo ./b2 -j$(nproc) install   --prefix=/usr/local   --with-serialization 
+sudo ./b2 -j$(nproc) install   --prefix=/usr/local   --with-chrono
+
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+sudo ldconfig
+```
+&nbsp;
+
+- boost 빌드 및 적용 이후, pinocchio ABI 관련 이슈 (2026.01.13 tykim)
+```
+* Problem
+(env) nesl@nesl-MS-7D99:~/Documents/cosypose$ python3 -m cosypose.scripts.run_single_test
+Setting OMP and MKL num threads to 1.
+Traceback (most recent call last):
+  File "/home/nesl/.pyenv/versions/3.7.6/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/home/nesl/.pyenv/versions/3.7.6/lib/python3.7/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/home/nesl/Documents/cosypose/cosypose/scripts/run_single_test.py", line 14, in <module>
+    from cosypose.datasets.datasets_cfg import make_scene_dataset, make_object_dataset
+  File "/home/nesl/Documents/cosypose/cosypose/datasets/datasets_cfg.py", line 8, in <module>
+    from .bop import BOPDataset, remap_bop_targets
+  File "/home/nesl/Documents/cosypose/cosypose/datasets/bop.py", line 11, in <module>
+    from cosypose.lib3d import Transform
+  File "/home/nesl/Documents/cosypose/cosypose/lib3d/__init__.py", line 1, in <module>
+    from .transform import Transform, parse_pose_args
+  File "/home/nesl/Documents/cosypose/cosypose/lib3d/transform.py", line 2, in <module>
+    import pinocchio as pin
+  File "/home/nesl/Documents/cosypose/env/lib/python3.7/site-packages/cmeel.prefix/lib/python3.7/site-packages/pinocchio/__init__.py", line 6, in <module>
+    from .pinocchio_pywrap import *
+ImportError: /home/nesl/Documents/cosypose/env/lib/python3.7/site-packages/cmeel.prefix/lib/python3.7/site-packages/pinocchio/pinocchio_pywrap.cpython-37m-x86_64-linux-gnu.so: undefined symbol: _ZN5boost7archive23basic_binary_iprimitiveINS0_15binary_iarchiveEcSt11char_traitsIcEE4loadERSs
+
+* Reason
+pinocchio는 옛날 ABI(=0)으로 빌드됨.
+다만 바로 위에처럼 바로 빌드하면 ABI가 1로 빌드되어 에러 발생.
+따라서 ABI=0으로 빌드하는 형태로 진행해야함.
+기존에 ABI=1로 빌드된거 덮어씌우지 말고 런타임에서 ABI=0을 먼저 보게 하는 형태로 함.
+
+* Solution
+sudo rm -rf bin.v2 stage
+sudo ./b2 -j$(nproc) install   --prefix=/usr/local/boost181_abi0   cxxflags="-D_GLIBCXX_USE_CXX11_ABI=0"   linkflags="-D_GLIBCXX_USE_CXX11_ABI=0"   --with-python --with-filesystem --with-system --with-serialization --with-chrono --with-thread --with-timer --with-date_time --with-atomic
+
+export LD_LIBRARY_PATH=/usr/local/boost181_abi0/lib:$LD_LIBRARY_PATH
+sudo ldconfig
+```
+&nbsp;
+
+
+
+
+
+
+
 
 
 
